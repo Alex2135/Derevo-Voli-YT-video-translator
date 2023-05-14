@@ -1,0 +1,11 @@
+git+https://github.com/ytdl-org/youtube-dl.git@master#egg=youtube_dl
+git+https://github.com/openai/whisper.git
+deep-translator 
+tqdm
+TTS==0.13.3
+git+https://github.com/egorsmkv/ukrainian-accentor.git
+ukrainian-word-stress
+git+https://github.com/huggingface/transformers
+transformers[sentencepiece]
+sentencepiece
+protobuf==4.21
