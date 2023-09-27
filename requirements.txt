@@ -8,4 +8,3 @@ ukrainian-word-stress
 git+https://github.com/huggingface/transformers
 transformers[sentencepiece]
 sentencepiece
-protobuf==4.21
