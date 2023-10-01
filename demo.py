@@ -1,7 +1,14 @@
+import argparse
+
 import gradio as gr
 
 from accentor.stressifier import StressifierRunner, default_unstressed_text
 from text_to_speech.text_to_speech_models import UkrainianTtsEspnet
+
+import argparse
+parser = argparse.ArgumentParser(description="")
+parser.add_argument('--share', action='store_true')
+parsed_args = parser.parse_args()
 
 
 def accentor(ukrainian_text: str, stressifier_model_name: str) -> str:
@@ -73,5 +80,5 @@ if __name__ == "__main__":
                 inputs=stressified_text,
                 outputs=tts_stressified_text
             )
-    demo.launch()
+    demo.launch(share=parsed_args.share)
 
