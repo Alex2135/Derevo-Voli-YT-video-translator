@@ -64,17 +64,18 @@ def make_pretty_text(text):
     for line in textwrap.wrap(text, width=100):
         print(line)
 
-        
+
+default_unstressed_text = """
+Привіт. Це перевірка можливих неправильних наголосів:
+«Десь чув, що той фраєр привіз їхньому царю грильяж та класну шубу з пір'я ґави.» .
+«Жебракують філософи при ґанку церкви в Гадячі, ще й шатро їхнє п'яне знаємо.».
+«Протягом цієї п'ятирічки в ґрунт було висаджено гарбуз, шпинат та цілющий фенхель.».
+"""
 if __name__ == "__main__":
-    ukr_text = """
-    Привіт. Це перевірка можливих неправильних наголосів:
-    «Десь чув, що той фраєр привіз їхньому царю грильяж та класну шубу з пір'я ґави.» .
-    «Жебракують філософи при ґанку церкви в Гадячі, ще й шатро їхнє п'яне знаємо.».
-    «Протягом цієї п'ятирічки в ґрунт було висаджено гарбуз, шпинат та цілющий фенхель.».
-    """
+
     stressifier_runner = StressifierRunner()
     for stressifier_model_name in ["Ukrainian Word Stressifier", "Ukrainian Accentor"]:
-        stressed_text = stressifier_runner.stressify(ukr_text, stressifier_model_name)
+        stressed_text = stressifier_runner.stressify(default_unstressed_text, stressifier_model_name)
         print(f"The model `{stressifier_model_name}`")
         # make_pretty_text(stressed_text)
         print(stressed_text)
