@@ -32,3 +32,16 @@ python3 demo.py --share
 ```
 
 The you will get a link for the app that you could share for `72 hours` while the *running machine is working*.
+
+## Build Docker image
+
+To build docker image use the next command:
+```bash
+docker build . -t derevo-voli-ytvt
+```
+
+To run a docker container with next command make sure that you are located in the repo directory:
+```bash
+cd Derevo-Voli-YT-video-translator
+docker run -it -v ./:/app derevo-voli-ytvt
+```

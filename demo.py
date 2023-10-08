@@ -1,3 +1,5 @@
+import os
+import wave
 import argparse
 
 import gradio as gr
@@ -5,23 +7,37 @@ import gradio as gr
 from accentor.stressifier import StressifierRunner, default_unstressed_text
 from text_to_speech.text_to_speech_models import UkrainianTtsEspnet
 
-import argparse
+
 parser = argparse.ArgumentParser(description="")
 parser.add_argument('--share', action='store_true')
 parsed_args = parser.parse_args()
 
 
+stressifier_runner = StressifierRunner()
+tts_model = UkrainianTtsEspnet()
+
+
 def accentor(ukrainian_text: str, stressifier_model_name: str) -> str:
-    stressifier_runner = StressifierRunner()
     # ["Ukrainian Word Stressifier", "Ukrainian Accentor"]
     stressed_text = stressifier_runner.stressify(ukrainian_text, stressifier_model_name)
     return stressed_text
 
 
 def text_to_speech(ukrainian_stressefied_text: str, stressifier_model_name: str):
-    tts_model = UkrainianTtsEspnet()
     return tts_model.run_tts(ukrainian_stressefied_text, stressifier_model_name)
     
+    
+def create_dummy_wav_file(file_name):
+    # Define the WAV file parameters
+    num_channels = 1  # Mono audio
+    sample_width = 2  # 2 bytes per sample for 16-bit audio
+    frame_rate = 44100  # Sample rate (samples per second)
+    num_frames = 0  # You can set this to the number of audio frames you have
+    comptype = "NONE"
+    compname = "not compressed"
+    with wave.open(file_name, "wb") as wav_file:
+        wav_file.setparams((num_channels, sample_width, frame_rate, num_frames, comptype, compname))
+
 
 if __name__ == "__main__":
     with gr.Blocks() as demo:
@@ -63,8 +79,13 @@ if __name__ == "__main__":
                     value=tts_voices_list[0],
                     label="Actor voice"
                 )
-            with gr.Column(scale=2):
-                tts_output = gr.Audio(label="Stressefied text", value="/tmp/audio/test.wav")
+            with gr.Column(scale=2):            
+                # Create a new WAV file
+                if not os.path.exists("/tmp/audio"):
+                    os.mkdir("/tmp/audio")
+                audio_file_path = "/tmp/audio/test.wav"
+                create_dummy_wav_file("/tmp/audio/test.wav")
+                tts_output = gr.Audio(label="Stressefied text", value=audio_file_path)
         with gr.Row():
             run_tts_btn = gr.Button("Run text-to-speech")
             run_tts_btn.click(
