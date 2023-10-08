@@ -55,7 +55,7 @@ jobs:
     steps:
 
     - name: Send greeting
-      run: env
+      run: env | sort
       # run: echo "Hello ${{ inputs.name }}"
 
     # - name: Checkout
