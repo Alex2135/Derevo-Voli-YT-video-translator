@@ -6,7 +6,7 @@ from ukrainian_tts.tts import TTS, Voices, Stress
 
 
 class TtsModel(ABC):
-    tts_voices: dict[str, any] = {}
+    tts_voices: dict = {}
     
     def run_tts(self, ukrainian_stressified_text: str, voice: str) -> str:
         pass
@@ -24,7 +24,7 @@ class UkrainianTtsEspnet:
     
     def __init__(self) -> None:
         device = "gpu" if torch.cuda.is_available() else "cpu"
-        self.tts = TTS(device=self.device)  # can try gpu, mps
+        self.tts = TTS(device=device)  # can try gpu, mps
     
     def run_tts(self, ukrainian_stressified_text: str, voice: str) -> str:
         if not os.path.exists("/tmp/audio"):
