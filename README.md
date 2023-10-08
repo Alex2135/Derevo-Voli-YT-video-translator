@@ -18,3 +18,17 @@ Install dependencies
 ```bash
 pip3 install -r requirements.txt
 ```
+
+## How to run the code
+
+The demo is available as a gradio app. To launch the app in your local machine you need to execute the next command:
+```bash
+python3 demo.py 
+```
+
+If you want to share the app like explicit resource by URL you need to run a command:
+```bash
+python3 demo.py --share
+```
+
+The you will get a link for the app that you could share for `72 hours` while the *running machine is working*.
