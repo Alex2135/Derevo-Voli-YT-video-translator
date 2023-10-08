@@ -30,24 +30,11 @@ name: Test ci
 on:
   push:
     branches: [ "feature/ci" ]
-  workflow_dispatch:
-    # Inputs the workflow accepts.
-    inputs:
-      name:
-        # Friendly description to be shown in the UI instead of 'name'
-        description: 'test'
-        # Default value if no value is explicitly provided
-        default: 'World'
-        # Input has to be provided for the workflow to run
-        required: true
-        # The data type of the input
-        type: string
-
 
 env:
   AWS_REGION: eu-central-1                    # set this to your preferred AWS region, e.g. us-west-1
-  aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID_TERRAFORM }}
-  aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY_TERRAFORM }}
+  # aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID_TERRAFORM }}
+  # aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY_TERRAFORM }}
   # ECR_REPOSITORY: MY_ECR_REPOSITORY           # set this to your Amazon ECR repository name
   # ECS_SERVICE: MY_ECS_SERVICE                 # set this to your Amazon ECS service name
   # ECS_CLUSTER: MY_ECS_CLUSTER                 # set this to your Amazon ECS cluster name
@@ -73,19 +60,19 @@ jobs:
       run: env | sort
       # run: echo "Hello ${{ inputs.name }}"
 
-    # - name: Checkout
-    #   uses: actions/checkout@v3
+    - name: Checkout
+      uses: actions/checkout@v3
 
-    # - name: Configure AWS credentials
-    #   uses: aws-actions/configure-aws-credentials@v1
-    #   with:
-    #     aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID_TERRAFORM }}
-    #     aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY_TERRAFORM }}
-    #     aws-region: ${{ env.AWS_REGION }}
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID_TERRAFORM }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY_TERRAFORM }}
+        aws-region: ${{ env.AWS_REGION }}
 
-    # - name: Login to Amazon ECR
-    #   id: login-ecr
-    #   uses: aws-actions/amazon-ecr-login@v1
+    - name: Login to Amazon ECR
+      id: login-ecr
+      uses: aws-actions/amazon-ecr-login@v1
 
     # - name: Build, tag, and push image to Amazon ECR
     #   id: build-image
