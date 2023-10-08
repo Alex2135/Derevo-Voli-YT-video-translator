@@ -22,4 +22,4 @@ RUN apt-get install -y libsndfile1-dev
 RUN pip3 install -r requirements.txt
 
 
-ENTRYPOINT [ "python3", "demo.py", "--share" ]
+ENTRYPOINT [ "python3", "demo.py" ]
