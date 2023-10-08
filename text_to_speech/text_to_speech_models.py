@@ -14,7 +14,7 @@ class TtsModel(ABC):
 
 class UkrainianTtsEspnet:
     
-    tts_voices: dict[str, any] = {
+    tts_voices: dict = {
         "Tetiana": Voices.Tetiana.value,
         "Mykyta": Voices.Mykyta.value,
         "Lada": Voices.Lada.value,
