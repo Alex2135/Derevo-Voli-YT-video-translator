@@ -101,5 +101,14 @@ if __name__ == "__main__":
                 inputs=stressified_text,
                 outputs=tts_stressified_text
             )
-    demo.launch(share=parsed_args.share)
+    if parsed_args.share:
+        launch_args = {
+            "share": True
+        }
+    else:
+        launch_args = {
+            "server_name": "0.0.0.0",
+            "server_port": 7860
+        }
+    demo.launch(**launch_args)
 

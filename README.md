@@ -43,5 +43,5 @@ docker build . -t derevo-voli-ytvt
 To run a docker container with next command make sure that you are located in the repo directory:
 ```bash
 cd Derevo-Voli-YT-video-translator
-docker run -it -v ./:/app derevo-voli-ytvt
+docker run -it -v ./:/app -p 7860:7860 derevo-voli-ytvt
 ```
