@@ -13,7 +13,6 @@ class TtsModel(ABC):
     
 
 class UkrainianTtsEspnet:
-    
     tts_voices: dict = {
         "Tetiana": Voices.Tetiana.value,
         "Mykyta": Voices.Mykyta.value,
@@ -37,3 +36,4 @@ class UkrainianTtsEspnet:
                 file
             )
         return "/tmp/audio/test.wav"
+    
