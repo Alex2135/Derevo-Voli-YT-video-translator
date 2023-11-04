@@ -12,7 +12,9 @@ RUN apt-get update && \
 RUN apt install -y build-essential \
     zlib1g-dev libncurses5-dev libgdbm-dev \
     libnss3-dev libssl-dev libsqlite3-dev \
-    libreadline-dev libffi-dev wget libbz2-dev
+    libreadline-dev libffi-dev wget libbz2-dev 
+RUN apt-get update
+RUN apt-get install -y ffmpeg
 RUN apt install -y software-properties-common
 RUN add-apt-repository -y ppa:deadsnakes/ppa && \
     apt-get update && \
